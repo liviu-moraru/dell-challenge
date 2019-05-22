@@ -8,5 +8,7 @@ namespace DellChallenge.D1.Api.Dal
         IEnumerable<ProductDto> GetAll();
         ProductDto Add(NewProductDto newProduct);
         ProductDto Delete(string id);
+        ProductDto GetProduct(string id);
+        ProductDto Update(string id, NewProductDto value);
     }
 }

@@ -29,7 +29,29 @@ namespace DellChallenge.D1.Api.Dal
 
         public ProductDto Delete(string id)
         {
-            throw new System.NotImplementedException();
+            var product = _context.Products.FirstOrDefault(p => p.Id == id);
+            if (product == null) return null;
+            _context.Remove(product);
+            _context.SaveChanges();
+            return MapToDto(product);
+
+        }
+
+        public ProductDto GetProduct(string id)
+        {
+            var product = _context.Products.FirstOrDefault(p => p.Id == id);
+            if (product == null) return null;
+            return MapToDto(product);
+        }
+
+        public ProductDto Update(string id, NewProductDto value)
+        {
+            var product = _context.Products.FirstOrDefault(p => p.Id == id);
+            if (product == null) return null;
+            product.Name = value.Name;
+            product.Category = value.Category;
+            _context.SaveChanges();
+            return MapToDto(product);
         }
 
         private Product MapToData(NewProductDto newProduct)
