@@ -10,7 +10,37 @@ class ProductList extends React.Component {
       items: []
     };
   }
+  removeItem(items, id) {
+    for(let i = 0; i < items.length; i++){
+      if(items[i].id == id){
+        items.splice(i,1);
+        i--;
+      }
+    }
+    return items;
+  }
+  deleteItem(item, e) {
+    this.setState({
+      isLoaded: false
+    });
+    fetch(`http://localhost:5000/api/products/${item}`, {
+      method: 'delete'
+    })
+        .then( res => {
+          var items = this.removeItem(this.state.items, item);
 
+          this.setState({
+            isLoaded: true,
+            items: items
+          })
+        },
+            error => {
+              this.setState({
+                isLoaded: true,
+                error
+              });
+            });
+  }
   componentDidMount() {
     fetch("http://localhost:5000/api/products")
       .then(res => res.json())
@@ -18,7 +48,7 @@ class ProductList extends React.Component {
         result => {
           this.setState({
             isLoaded: true,
-            items: result
+            items: result,
           });
         },
         // Note: it's important to handle errors here
@@ -44,7 +74,9 @@ class ProductList extends React.Component {
           <ul>
             {items.map(item => (
               <li key={item.id}>
-                {item.name} - {item.category}
+
+                <a href={'products/edit/' + item.id}>{item.name} - {item.category}</a>
+                <button onClick={(e) => this.deleteItem(item.id, e)}>Delete</button>
               </li>
             ))}
           </ul>
