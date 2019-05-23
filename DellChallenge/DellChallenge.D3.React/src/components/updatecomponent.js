@@ -31,14 +31,27 @@ class UpdateProduct extends Component {
             .catch(err => console.log(err));
 
     }
+    
     validateForm() {
+        let msg = '';
+        let valid = true;
         if(!this.state.Name)
         {
-            alert("Invalid");
-            return false;
+            msg += 'Please enter a name\n';
+            valid = false;
         }
-        return true;
+        if(!this.state.Category)
+        {
+            msg += 'Please enter a category\n';
+            valid = false;
+        }
+        if(!valid)
+        {
+            alert(msg);
+        }
+        return valid;
     }
+
     handleSubmit = event => {
         event.preventDefault();
         if(!this.validateForm()) return;
