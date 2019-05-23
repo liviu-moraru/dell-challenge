@@ -5,6 +5,7 @@ import Privacy from "../components/privacy";
 import Products from "../components/products";
 import NewProduct from "../components/newproduct";
 import CookieConsent from "react-cookie-consent";
+import UpdateProduct from "../components/updatecomponent";
 
 const ReactRouter = () => {
   return (
@@ -22,9 +23,10 @@ const ReactRouter = () => {
       </CookieConsent>
         <main role="main" className="pb-3">
           <Route exact path="/" component={Home} />
-          <Route path="/privacy" component={Privacy} />
-          <Route path="/products" component={Products} />
-          <Route path="/newproduct" component={NewProduct} />
+          <Route exact path="/privacy" component={Privacy} />
+          <Route exact path="/products" component={Products} />
+          <Route exact path="/newproduct" component={NewProduct} />
+          <Route path="/update/:id" component={UpdateProduct} />
         </main>
       </div>
     </React.Fragment>

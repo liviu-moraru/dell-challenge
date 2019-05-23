@@ -13,8 +13,17 @@ class NewProduct extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  validateForm() {
+    if(!this.state.Name)
+    {
+      alert("Invalid");
+      return false;
+    }
+    return true;
+  }
   handleSubmit = event => {
     event.preventDefault();
+    if(!this.validateForm()) return;
     let postData = {
       Name: this.state.Name,
       Category: this.state.Category
@@ -59,6 +68,8 @@ class NewProduct extends Component {
             name="Name"
             onChange={this.handleInputChange}
             value={this.state.Name}
+            data-val="true"
+            date-val-required="Please enter a name"
           />
           <span
             className="text-danger field-validation-valid"

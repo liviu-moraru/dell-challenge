@@ -75,7 +75,7 @@ class ProductList extends React.Component {
             {items.map(item => (
               <li key={item.id}>
 
-                <a href={'products/edit/' + item.id}>{item.name} - {item.category}</a>
+                <a href={'/update/' + item.id}>{item.name} - {item.category}</a>
                 <button onClick={(e) => this.deleteItem(item.id, e)}>Delete</button>
               </li>
             ))}
