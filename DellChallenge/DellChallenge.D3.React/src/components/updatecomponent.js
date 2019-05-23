@@ -31,7 +31,6 @@ class UpdateProduct extends Component {
             .catch(err => console.log(err));
 
     }
-
     validateForm() {
         let msg = '';
         let valid = true;
@@ -39,12 +38,14 @@ class UpdateProduct extends Component {
         {
             msg += 'Please enter a name\n';
             valid = false;
+
         }
         if(!this.state.Category)
         {
             msg += 'Please enter a category\n';
             valid = false;
         }
+
         if(!valid)
         {
             alert(msg);
